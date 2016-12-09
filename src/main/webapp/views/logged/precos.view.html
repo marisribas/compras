@@ -1,0 +1,190 @@
+<h3>Precos</h3> 
+
+<div data-component="crn-datasource" id="crn-datasource-763276" class="component-holder"> 
+   <datasource filter="" name="Precos" entity="api/rest/Precos" keys="id" rows-per-page="100" delete-message="Deseja remover?"></datasource> 
+</div> 
+<div data-component="crn-button" id="crn-button-564202"> 
+  <button class="btn btn-primary" type="submit" onclick="" ng-click="Precos.startInserting()" ng-hide="Precos.inserting || Precos.editing"><i class="fa fa-user"></i> <span content="{{&quot;template.crud.new&quot; | translate}}">{{"template.crud.new" | translate}}</span></button> 
+</div> 
+<div class="component-holder" data-component="crn-grid" id="crn-grid-Precos"> 
+  <div crn-datasource="Precos" ng-hide="Precos.editing || Precos.inserting"> 
+    <table class="table  table-bordered table-hover table-striped"> 
+      <thead> 
+        <tr class="table-header"> 
+           
+          <th class="active"> 
+            <div>Data</div>
+          </th> 
+          <th> 
+            <div>Preco</div>
+          </th> 
+          <th> 
+            <div>produtos</div>
+          </th> 
+          <th> 
+            <div>supermercado</div>
+          </th> 
+          <th> 
+          <div content="{{&quot;template.crud.actions&quot; | translate}}">{{"template.crud.actions" | translate}}</div>
+          </th> 
+        </tr> 
+      </thead> 
+      <tbody> 
+        <tr class="table-content" ng-repeat="rowData in datasource.data"> 
+           
+          <td class="active"> 
+            <div content="
+
+                  {{rowData.data}}
+        
+            ">
+
+                  {{rowData.data}}
+        
+            </div>
+          </td> 
+          <td> 
+            <div content="
+
+                  {{rowData.preco}}
+        
+            ">
+
+                  {{rowData.preco}}
+        
+            </div>
+          </td> 
+          <td> 
+            <div content="
+
+                {{rowData.produtos.produto}}
+        
+            ">
+
+                {{rowData.produtos.produto}}
+        
+            </div>
+          </td> 
+          <td> 
+            <div content="
+
+                {{rowData.supermercado.supermercado}}
+        
+            ">
+
+                {{rowData.supermercado.supermercado}}
+        
+            </div>
+          </td> 
+          <td> 
+            <div> 
+              <button class="btn btn-default btn-sm" type="submit" ng-click="datasource.startEditing(rowData)"><i class="fa fa-edit"></i></button> 
+              <button class="btn btn-default btn-sm" type="submit" ng-click="datasource.remove(rowData)"><i class="fa fa-times"></i></button> 
+            </div></td> 
+        </tr> 
+      </tbody> 
+    </table> 
+    <div class="table-footer-controls"> 
+      <button class="btn btn-default btn-block btn-clicked" ng-show="datasource.hasNextPage()" ng-click="datasource.nextPage()" content="{{&quot;template.crud.load_more&quot; | translate}}...">{{"template.crud.load_more" | translate}}...</button> 
+    </div> 
+  </div> 
+</div> 
+<div data-component="crn-form" id="crn-form-form-Precos"> 
+  <div class="form" ng-show="Precos.editing || Precos.inserting"> 
+    <form crn-datasource="Precos"> 
+      <div class="tool-bar" ng-hide="datasource.editing || datasource.inserting"> 
+        <button class="btn btn-primary" ng-click="datasource.startInserting()"><i class="glyphicon glyphicon-plus-sign"></i></button> 
+        <button class="btn btn-success" ng-click="datasource.startEditing()"><i class="glyphicon glyphicon-edit"></i></button> 
+        <button class="btn btn-primary" ng-disabled="!datasource.hasPrevious()" ng-click="datasource.previous()"><i class="glyphicon glyphicon-chevron-left"></i></button> 
+        <button class="btn btn-primary" ng-disabled="!datasource.hasNext()" ng-click="datasource.next()"><i class="glyphicon glyphicon-chevron-right"></i></button> 
+        <button class="btn btn-primary" ng-click="datasource.remove()"><i class="glyphicon glyphicon-trash"></i></button> 
+      </div> 
+      <div class="active-bar" ng-hide="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        <button class="btn btn-success" ng-click="datasource.post()"><i class="glyphicon glyphicon-ok"></i></button> 
+        <button class="btn btn-danger" ng-click="datasource.cancel()"><i class="glyphicon glyphicon-remove"></i></button> 
+      </div> 
+      <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        
+        <div data-component="crn-textinput" id="crn-textinput-data"> 
+          <div class="form-group"> 
+          
+            <label for="textinput-data">Data</label> 
+        
+        <input type="text" ng-model="Precos.active.data" class="form-control" id="textinput-data" placeholder="Data" required="required"> 
+          </div> 
+        </div> 
+        
+        <div data-component="crn-textinput" id="crn-textinput-preco"> 
+          <div class="form-group"> 
+          
+            <label for="textinput-preco">Preco</label> 
+        
+        <input type="text" ng-model="Precos.active.preco" class="form-control" id="textinput-preco" placeholder="Preco" required="required"> 
+          </div> 
+        </div> 
+        
+        <div data-component="crn-textinput" id="crn-textinput-produtos"> 
+          <div class="form-group"> 
+          
+            <label for="textinput-produtos">produtos</label> 
+        
+        
+        <div data-component="crn-datasource" class="component-holder"> 
+          <datasource name="produtos" entity="api/rest/Produtos" keys="id" dependent-by="{{Precos}}"></datasource> 
+        </div>
+        <ui-select ng-model="Precos.active.produtos" crn-datasource="produtos" class="crn-select" id="textinput-produtos"> 
+          <ui-select-match content="
+            {{$select.selected.produto}} 
+          ">
+            {{$select.selected.produto}} 
+          </ui-select-match> 
+          <ui-select-choices repeat="rowData in datasource.data | filter : $select.search"> 
+            <div data-container="true" content="
+              {{rowData.produto}}
+            ">
+              {{rowData.produto}}
+            </div> 
+          </ui-select-choices> 
+        </ui-select> 
+          </div> 
+        </div> 
+        
+        <div data-component="crn-textinput" id="crn-textinput-supermercado"> 
+          <div class="form-group"> 
+          
+            <label for="textinput-supermercado">supermercado</label> 
+        
+        
+        <div data-component="crn-datasource" class="component-holder"> 
+          <datasource name="supermercado" entity="api/rest/Supermercado" keys="id" dependent-by="{{Precos}}"></datasource> 
+        </div>
+        <ui-select ng-model="Precos.active.supermercado" crn-datasource="supermercado" class="crn-select" id="textinput-supermercado"> 
+          <ui-select-match content="
+            {{$select.selected.supermercado}} 
+          ">
+            {{$select.selected.supermercado}} 
+          </ui-select-match> 
+          <ui-select-choices repeat="rowData in datasource.data | filter : $select.search"> 
+            <div data-container="true" content="
+              {{rowData.supermercado}}
+            ">
+              {{rowData.supermercado}}
+            </div> 
+          </ui-select-choices> 
+        </ui-select> 
+          </div> 
+        </div> 
+    
+    <!-- OneToN -->
+  <!-- OneToOne  end -->
+  
+  <!-- NtoN  -->
+  <!-- NtoN  end-->
+    
+      </fieldset> 
+      
+    
+      
+    </form> 
+  </div> 
+</div> 
